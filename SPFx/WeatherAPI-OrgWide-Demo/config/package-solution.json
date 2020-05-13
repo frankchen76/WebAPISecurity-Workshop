@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "WeatherAPI-OrgWide-Demo",
+    "id": "acdf9076-92d9-4ccd-b685-818f2d6184c5",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false,
+    "webApiPermissionRequests": [
+      {
+        "resource": "SecurityWorkshop.WeatherAPI",
+        "scope": "Weather.Read.Basic"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/WeatherAPI-OrgWide-Demo.sppkg"
+  }
+}

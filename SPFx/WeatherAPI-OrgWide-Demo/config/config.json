@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "weather-api-org-wide-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/weatherApiOrgWide/WeatherApiOrgWideWebPart.js",
+          "manifest": "./src/webparts/weatherApiOrgWide/WeatherApiOrgWideWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "WeatherApiOrgWideWebPartStrings": "lib/webparts/weatherApiOrgWide/loc/{locale}.js"
+  }
+}
