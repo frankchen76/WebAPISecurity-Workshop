@@ -1,7 +1,15 @@
 ## weather-api-org-wide-demo
 
-This is where you include your WebPart documentation.
+This is sample to demonstrate the Custom Web API usage.
 
+### Instruction
+* Run ```gulp deploy-solution``` to deploy the solution to App Catalog and install it on a specific site collection
+* Run ```gulp remove-solution``` to remove the solution from App Catalog and a specific site collection
+* Run the following command to bundle, package and deploy the SPFx solution
+
+```bash
+gulp bundle --ship && gulp package-solution --ship && gulp deploy-solution
+```
 ### Building the code
 
 ```bash
