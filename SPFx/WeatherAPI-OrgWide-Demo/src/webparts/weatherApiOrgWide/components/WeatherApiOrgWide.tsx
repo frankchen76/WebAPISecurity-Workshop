@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './WeatherApiOrgWide.module.scss';
 import { IWeatherApiOrgWideProps } from './IWeatherApiOrgWideProps';
 import { escape } from '@microsoft/sp-lodash-subset';
-import { PrimaryButton, Stack, Spinner, autobind } from 'office-ui-fabric-react';
+import { PrimaryButton, Stack, Spinner } from 'office-ui-fabric-react';
 import { IWeatherApiOrgWideState } from './IWeatherApiOrgWideState';
 import { AadHttpClient, HttpClient } from '@microsoft/sp-http';
 
@@ -15,8 +15,7 @@ export default class WeatherApiOrgWide extends React.Component<IWeatherApiOrgWid
     };
   }
 
-  @autobind
-  private async _customAPIHandler(): Promise<void> {
+  private _customAPIHandler = async (): Promise<void> => {
     try {
       this.setState({
         loading: true
