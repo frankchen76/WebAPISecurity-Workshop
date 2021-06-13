@@ -46,6 +46,8 @@ namespace WeatherAPI02
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
