@@ -77,4 +77,21 @@ dotnet add package Microsoft.Identity.Web
         "TenantId": "common" //use common for multi-tenant, or tenant id for single tenant
     },
     "AllowedHosts": "*"
-}```
+}
+```
+
+### Access Encrypted Column
+Added the following code to use Managed Id via "DefaultAzureCredential" to access encrypted column "Startup.cs".
+
+```CSharp
+public void ConfigureServices(IServiceCollection services)
+{
+    // Register Azure KeyVault provider
+    SqlColumnEncryptionAzureKeyVaultProvider akvProvider = new SqlColumnEncryptionAzureKeyVaultProvider(new DefaultAzureCredential());
+    Dictionary<string, SqlColumnEncryptionKeyStoreProvider> providers = new Dictionary<string, SqlColumnEncryptionKeyStoreProvider>();
+    providers.Add(SqlColumnEncryptionAzureKeyVaultProvider.ProviderName, akvProvider);
+    SqlConnection.RegisterColumnEncryptionKeyStoreProviders(providers);
+
+    // other init code
+}
+```
