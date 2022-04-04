@@ -31,3 +31,9 @@ This sample walks through the detail protection steps by leveraging JwtBearer to
 ### WeatherAPI02
 This sample walks through the detail protection steps by leveraging "Microsoft.Identity.Web" nuget package
 
+### CouponAPI
+This sample walks through: 
+* Leverage ASP.NET Core 5.0 to build a Web API. 
+* Secure Web API using "Microsoft.Identity.Web". 
+* Leverage Entity Framework Core to access Azure SQL DB using "DefaultCredential" which can use Managed Id to access DB. 
+* Access Always Encrypted Column feature fro Azure SQL DB. 
