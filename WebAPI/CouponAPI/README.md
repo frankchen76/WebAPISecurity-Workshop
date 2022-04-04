@@ -1,4 +1,4 @@
-# Module06-CouponAPI
+# CouponAPI
 
 This sample demonstrated the custom API built by .NET Core
 
