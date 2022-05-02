@@ -42,8 +42,7 @@ dotnet ef migrations list
  * run the following command to generate context and model class. You need to use SQL authentication to run the below command. Alternative approach for hiding password is to leverage secret.json approach from VS
 
 ```
-dotnet ef dbcontext scaffold "Data Source=m365x725618-contosodb01.database.windows.net;Database=CouponDB; User Id=[azure-sql-userid];Password=[azure-sql-userpassword;" Microsoft.EntityFrameworkCore.SqlServer -o Models --table Coupons --table CouponCode --context CouponContext --force
-
+dotnet ef dbcontext scaffold Name=ConnectionStrings:CouponDB Microsoft.EntityFrameworkCore.SqlServer -o Models --table Coupons --table CouponCode --context CouponContext --force
 ```
 
 ### Authentication

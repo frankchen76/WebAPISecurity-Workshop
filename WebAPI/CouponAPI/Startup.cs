@@ -36,6 +36,7 @@ namespace SPFxWorkshop.CouponAPI
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
+                
 
             // Register Azure KeyVault provider
             SqlColumnEncryptionAzureKeyVaultProvider akvProvider = new SqlColumnEncryptionAzureKeyVaultProvider(new DefaultAzureCredential());

@@ -37,3 +37,11 @@ This sample walks through:
 * Secure Web API using "Microsoft.Identity.Web". 
 * Leverage Entity Framework Core to access Azure SQL DB using "DefaultCredential" which can use Managed Id to access DB. 
 * Access Always Encrypted Column feature fro Azure SQL DB. 
+
+### CouponAPI2
+This sample walks through: 
+* Leverage ASP.NET Core 6.0 to build a Web API. 
+* Secure Web API using "Microsoft.Identity.Web". 
+* Leverage Entity Framework Core to access Azure SQL DB using "DefaultCredential" which can use Managed Id to access DB. 
+* Access Always Encrypted Column feature for Azure SQL DB using "DefaultCredential" which can use System assigned Managed Id
+* Demonstrated the downstream API patterns to call a MS Graph API
