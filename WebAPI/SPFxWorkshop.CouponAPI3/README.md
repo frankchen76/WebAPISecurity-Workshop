@@ -55,7 +55,7 @@ dotnet add package Microsoft.Identity.Web
   * Column Encryption Setting=enabled: enable Always encryption for column encryption. 
   * Authentication=Active Directory Default: enable default authenticaiton which will use the below method: 
     * VSCode: Azure connection account
-    * Vistual Studio: Azure Subscription account
+    * Vistual Studio: Tools->Options->Azure Subscription account
     * System assigned Managed Id: use default System assigned managed Id
     * User Assigned Managed Id: add "User Id=[AppId]" in your connection string if you need to specify User Assigned Managed Id. 
 ```JSON
