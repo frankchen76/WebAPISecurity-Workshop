@@ -2,8 +2,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using SPFxWorkshop.CouponAPI3.Models;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
+
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
 // Add services to the container.
 // AddAuthentication() and AddMicrosoftIdentityWebApi secure the web api

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -27,25 +28,46 @@ namespace SPFxWorkshop.CouponAPI3.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Coupon>>> GetCoupons()
         {
-            // Verify the token scope
-            HttpContext.VerifyUserHasAnyAcceptedScope(new string[] { "Coupon.Read", "Coupon.ReadWrite", "Coupon.FullControl" });
-            //return await _context.Coupons.Where(c => String.Compare(c.Owner, HttpContext.User.Identity.Name, true) == 0).ToListAsync();
-            var result = from c in _context.Coupons
-                         where c.Owner == HttpContext.User.Identity.Name
-                         select c;
-            return await result.ToListAsync();
+            List<Coupon> ret = null;
+            ClaimsPrincipal principal = HttpContext.User as ClaimsPrincipal;
+            string oid = principal.FindFirst("oid")?.Value;
+            string sub = principal.FindFirst("sub")?.Value;
+            bool isAppOnly = oid != null && sub != null && oid == sub;
+
+            // Verify the token scope/role
+            if (isAppOnly) 
+            {
+                HttpContext.ValidateAppRole(new string[] { "Coupon.All.FullControl"});
+                //return await _context.Coupons.Where(c => String.Compare(c.Owner, HttpContext.User.Identity.Name, true) == 0).ToListAsync();
+                var result = from c in _context.Coupons
+                             select c;
+                ret = await result.ToListAsync();
+            }
+            else
+            {
+                HttpContext.VerifyUserHasAnyAcceptedScope(new string[] { "Coupon.Read", "Coupon.ReadWrite", "Coupon.FullControl" });
+                //return await _context.Coupons.Where(c => String.Compare(c.Owner, HttpContext.User.Identity.Name, true) == 0).ToListAsync();
+                var result = from c in _context.Coupons
+                             where c.Owner == principal.FindFirstValue("upn")
+                             select c;
+                ret = await result.ToListAsync();
+
+            }
+            return ret;
         }
 
         // GET: api/Coupon/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Coupon>> GetCoupon(int id)
         {
+            ClaimsPrincipal principal = HttpContext.User as ClaimsPrincipal;
+
             // Verify the token scope
             HttpContext.VerifyUserHasAnyAcceptedScope(new string[] { "Coupon.ReadWrite", "Coupon.FullControl" });
 
             // var coupon = await _context.Coupons.FindAsync(id);
             var couponQuery = from c in _context.Coupons
-                              where c.Id == id && c.Owner == HttpContext.User.Identity.Name
+                              where c.Id == id && c.Owner == principal.FindFirstValue("upn")
                               select c;
             var coupon = await couponQuery.FirstOrDefaultAsync();
 
@@ -107,10 +129,12 @@ namespace SPFxWorkshop.CouponAPI3.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCoupon(int id)
         {
+            ClaimsPrincipal principal = HttpContext.User as ClaimsPrincipal;
+
             HttpContext.VerifyUserHasAnyAcceptedScope(new string[] { "Coupon.FullControl" });
             // var coupon = await _context.Coupons.FindAsync(id);
             var couponQuery = from c in _context.Coupons
-                              where c.Id == id && c.Owner == HttpContext.User.Identity.Name
+                              where c.Id == id && c.Owner == principal.FindFirstValue("upn")
                               select c;
             var coupon = await couponQuery.FirstOrDefaultAsync();
 
