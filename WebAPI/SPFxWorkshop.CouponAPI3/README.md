@@ -58,6 +58,7 @@ dotnet add package Microsoft.Identity.Web
     * Vistual Studio: Tools->Options->Azure Subscription account
     * System assigned Managed Id: use default System assigned managed Id
     * User Assigned Managed Id: add "User Id=[AppId]" in your connection string if you need to specify User Assigned Managed Id. 
+    * AzureAd->TenantId: if this is multi-tenant, it has to be "common", otherwise, it has to be the tenant id of the host. 
 ```JSON
 {
     "Logging": {
